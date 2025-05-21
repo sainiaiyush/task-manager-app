@@ -40,7 +40,7 @@ public class TaskController {
     @GetMapping
     public ResponseEntity<List<TaskResponseDTO>> getTasks(Principal principal) {
         User user = getCurrentUser(principal);
-        List<TaskResponseDTO> tasks = taskRepository.findByUserUsername(String.valueOf(user)).stream()
+        List<TaskResponseDTO> tasks = taskRepository.findByUserUsername(user.getUsername()).stream()
                 .map(TaskMapper::toDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(tasks);
